@@ -1,24 +1,24 @@
 import React, {Component} from 'react';
 
-import CounterProvider from './components/Counter';
-import Page from "./components/Page";
+import Counter from './components/Counter';
 
 class App extends Component {
-  render() {
-    return (
-      <CounterProvider>
-        <Page/>
-        <CounterProvider.Consumer>
-          {counter =>
-            <div className="counter">
-              <button onClick={counter.decrement}>-</button>
-              <span>{counter.count}</span>
-              <button onClick={counter.increment}>+</button>
-            </div>
 
-          }
-        </CounterProvider.Consumer>
-      </CounterProvider>
+  state = {
+    count: 0
+  };
+
+  render() {
+    const {count} = this.state;
+
+    return (
+      <div className="container">
+        <Counter
+          count={count}
+          onCountDown={() => this.setState({count: count + 1})}
+          onCountUp={() => this.setState({count: count - 1})}
+        />
+      </div>
     );
   }
 }
